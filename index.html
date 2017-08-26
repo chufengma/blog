@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<div class="col-md-8 col-sm-12">
+    <div class="panel panel-default">
+<!-- 		<div class="panel-heading">
+			<h3 class="panel-title">Blog</h3>
+		</div> -->
+		<ul class="list-group">
+			{% for post in site.posts reversed %}
+				<li class="list-group-item title">
+				<!--span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span-->    
+					<a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>      
+				</li>
+			{% endfor %}          
+		</ul>
+    </div>
+</div>
