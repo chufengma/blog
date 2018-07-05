@@ -50,6 +50,11 @@ JavaScript通过上面的原型和原型对象的配合来实现继承。
 当创建一个B对象的时候，会根据B.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。这样就形成了这样的链条：
 
 ```
+A.__proto__ == [Function Object]
+A.prototype == {__proto__ = Object.prototype, constructor=[Function A]}
+B.__proto__ == [Function A]
+B.prototype == {__proto__ = A.prototype, constructor=[Function B]}
+
 a.__proto__ == A.prototype
 a.__proto__.__proto__ = Object.prototype
 b.__proto__ == B.prototype
