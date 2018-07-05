@@ -49,8 +49,10 @@ JavaScript通过上面的原型和原型对象的配合来实现继承。
 在B对象需要继承A对象的时候，先创建一个B构造函数，然后将B.__proto__ 指向A对象的构造函数，然后创建一个B.prototype对象，将B.prototype.constructor指向B的构造函数, 将B.prototype.__proto__ 指向A.prototype。
 当创建一个B对象的时候，会根据B.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。这样就形成了这样的链条：
 
+```
 a.__proto__ == A.prototype
 a.__proto__.__proto__ = Object.prototype
 b.__proto__ == B.prototype
 b.__proto__.__proto__ == A.prototype
 b.__proto__.__proto__.__proto__ == Object.prototype
+```
