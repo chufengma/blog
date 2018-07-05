@@ -8,6 +8,7 @@ JavaScript中任意对象都有一个原型对象，对象从原型对象继承�
 
 JavaScript中创建任意对象的时候，会给这个对象创建一个`__proto__`属性，这个属性就是他的原型对象。JS对象从原型对象上继承属性和方法。创建任意函数的时候，给这个函数创建`__proto__`属性的同时也创建一个`prototype`属性, `prototype` 就是函数的原型，它约定了函数的行为。`prototype` 属性是一个带有`constructor`属性的对象。
 
+
 可以这么理解：
 ```
 Object = { [__proto__] , ... }
@@ -47,13 +48,19 @@ JavaScript通过上面的原型和原型对象的配合来实现继承。
 当需要创建A实例的时候，会根据A.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。
 
 在B对象需要继承A对象的时候，先创建一个B构造函数，然后将B.__proto__ 指向A对象的构造函数，然后创建一个B.prototype对象，将B.prototype.constructor指向B的构造函数, 将B.prototype.__proto__ 指向A.prototype。
-当创建一个B对象的时候，会根据B.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。这样就形成了这样的链条：
+当创建一个B对象的时候，会根据B.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。
+
+`对于JavaScritp顶级对象而言。`Function.__proto__ === Function.prototype`, `Function.prototype.__proto__ === Object.prototype`。原型链至此为顶。所有函数对象的原型都回溯到`Function.prototype`, 所有对象的原型最终都回溯到`Object.prototype`。`
+
+这样就形成了这样的链条：
 
 ```
-A.__proto__ == [Function Object]
+A.__proto__ == [Function Object] = Function.prototype
 A.prototype == {__proto__ = Object.prototype, constructor=[Function A]}
 B.__proto__ == [Function A]
 B.prototype == {__proto__ = A.prototype, constructor=[Function B]}
+
+// 顶
 
 a.__proto__ == A.prototype
 a.__proto__.__proto__ = Object.prototype
