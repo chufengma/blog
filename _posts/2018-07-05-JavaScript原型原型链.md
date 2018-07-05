@@ -12,7 +12,7 @@ JavaScript中创建任意对象的时候，会给这个对象创建一个`__prot
 ```
 Object = { [__proto__] , ... }
 Function = Function { [prototype] , [__proto__], ... } 
-prototype = { constructor: [Function] }
+prototype = { constructor: [Function], [__proto__], ...  }
 ```
 
 结合实际例子：
@@ -35,13 +35,22 @@ A 有一个prototype属性，他是一个对象，{constructor : [A的构造函�
 B 有一个__proto__属性，指向一个B的构造函数。
 B 有一个prototype属性，他是一个对象，{constructor : [B的构造函数]}
 
-a 有一个__proto__属性，指向一个Object对象。
-b 有一个__proto__属性，指向一个A对象。
+a 有一个__proto__属性，指向A.prototype。
+b 有一个__proto__属性，指向B.prototype。
 ```
 
 #### 原型链
 
 JavaScript通过上面的原型和原型对象的配合来实现继承。
 
-在A对象需要继承B对象的时候，先创建一个A构造函数，然后将A.__proto__ 指向B对象的构造函数，然后创建一个A.prototype对象，将A.prototype.constructor指向A的构造函数。
-...待续
+在创建A对象的时候，先创建一个A构造函数，然后将A.__proto__ 指向顶级对象Object的构造函数。然后创建一个A.prototype对象，将A.prototype.constructor指向A的构造函数, 将A.prototype.__proto__ 指向 Object.prototype。
+当需要创建A实例的时候，会根据A.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。
+
+在B对象需要继承A对象的时候，先创建一个B构造函数，然后将B.__proto__ 指向A对象的构造函数，然后创建一个B.prototype对象，将B.prototype.constructor指向B的构造函数, 将B.prototype.__proto__ 指向A.prototype。
+当创建一个B对象的时候，会根据B.prototype.constructor创建一个实例，并将这个实例的__proto__对象指向B.prototype。这样就形成了这样的链条：
+
+a.__proto__ == A.prototype
+a.__proto__.__proto__ = Object.prototype
+b.__proto__ == B.prototype
+b.__proto__.__proto__ == A.prototype
+b.__proto__.__proto__.__proto__ == Object.prototype
