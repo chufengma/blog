@@ -4,9 +4,9 @@
 
 JavaScript依赖原型与原型链来实现继承。在JavaScript世界里面只有Function，Object，和基本类型，没有Java语言里面类似的Class。所以JavaScript的继承其实是对象的继承，不是类的继承。JavaScritp通过原型和原型组成的链来实现这一机制。
 
-JavaScript中任意对象都有一个原型对象，对象从原型对象继承属性和方法。通常`[object].__proto__` 属性的值就对应他的原型对象。Function 比一般对象多了一个`prototype`属性，表示原型，他是一个带有构造函数的对象。
+JavaScript中任意对象都有一个原型，对象从原型继承属性和方法。通常`[object].__proto__` 属性的值就对应他的原型。Function 比一般对象多了一个`prototype`属性，他是一个带有构造函数的对象。
 
-JavaScript中创建任意对象的时候，会给这个对象创建一个`__proto__`属性，这个属性就是他的原型对象。JS对象从原型对象上继承属性和方法。创建任意函数的时候，给这个函数创建`__proto__`属性的同时也创建一个`prototype`属性, `prototype` 就是函数的原型，它约定了函数的行为。`prototype` 属性是一个带有`constructor`属性的对象。
+JavaScript中创建任意对象的时候，会给这个对象创建一个`__proto__`属性，这个属性就是他的原型。JS对象从原型上继承属性和方法;创建任意Function的时候，给这个函数创建`__proto__`属性的同时也创建一个`prototype`属性, `prototype` 属性是一个带有`constructor`属性的对象，`constructor`就是Function本身。当调用new Function创建一个对象的时候，会将这个对象的`__proto`属性指向Function的prototype。
 
 
 可以这么理解：
@@ -17,14 +17,18 @@ prototype = { constructor: [Function], [__proto__], ...  }
 ```
 
 结合实际例子：
-```
+```javascript
 // class 实际上是Function的语法糖。
 class A {
-	name : "123123"
+	constructor() {
+		this.name = "fengma"
+	}
 }
 
 class B extends A {
-	age : 123123
+	constructor() {
+		this.age = 8
+	}
 }
 
 let a = new A();
