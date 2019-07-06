@@ -8,4 +8,4 @@ windowmanager管理android系统的window，window是一个显示界面的抽象
 3. ViewRootImpl内置创建一个Surface，并创建View树
 4. ViewRootImpl 调用 addToDiaplay显示
 
-![windows抽象](http://onefengma.com/blog/images/ink.png)
+![windows抽象](http://onefengma.com/blog/images/ink.png){:height="100" width="100"}
