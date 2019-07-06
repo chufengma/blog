@@ -71,4 +71,6 @@ b.__proto__.__proto__.__proto__ == Object.prototype
 #### 方便的理解
 关于 `__proto__` 和 `prototype` 不管上面怎么解释都有点绕。这里总结一种方便的理解方法：`X.__proto__` 表示的X的原型，如果X是Object，那`X.__proto__` 肯定也是Object。X如果是Function，那么`X.__proto__` 肯定也是Function。`prototype` 永远只是Function的属性，`prototype.constructor` 永远指向这个Function本身，`prototype.__proto__` 永远指向上一级对象的prototype（这里的上一级要么是父对象，要么是“类”）。
 
+当搜寻一个对象a的属性的时候，先从a本身获取，获取不到则查找a.__proto__,如果仍然获取不到，则查找a.__proto__.__proto__,直到....__proto__为null。
+
 prototype的原型永远也是prototype，function的原型永远也是function。这才是原型真正的字面理解。
